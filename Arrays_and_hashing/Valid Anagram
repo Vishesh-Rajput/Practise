@@ -1,0 +1,35 @@
+Valid Anagram  
+Solved  
+Given two strings s and t, return true if the two strings are anagrams of each other, otherwise return false.
+
+An anagram is a string that contains the exact same characters as another string, but the order of the characters can be different.
+
+Example 1:
+
+Input: s = "racecar", t = "carrace"
+
+Output: true
+
+// 1. Using Hash Map / Frequency Count (Best for understanding - O(n) time, O(1) space assuming fixed character set)
+bool isAnagramUsingMap(const string& s, const string& t) {
+    if (s.size() != t.size()) return false;
+
+    int freq[26] = {0};
+    for (char c : s) freq[c - 'a']++;
+    for (char c : t) freq[c - 'a']--;
+    
+    for (int count : freq) {
+        if (count != 0) return false;
+    }
+    return true;
+}
+
+// 2. Using Sorting (O(n log n) time, O(1) space if in-place)
+bool isAnagramUsingSort(string s, string t) {
+    if (s.size() != t.size()) return false;
+
+    sort(s.begin(), s.end());
+    sort(t.begin(), t.end());
+
+    return s == t;
+}
