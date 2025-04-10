@@ -1,0 +1,52 @@
+49. Group Anagrams
+Medium
+Topics
+Companies
+Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+
+ 
+
+Example 1:
+
+Input: strs = ["eat","tea","tan","ate","nat","bat"]
+
+Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+
+
+// sorting every word and mapping with key as sorted word /* time - k*nlogn    */
+
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>> res ;
+
+        unordered_map<string, vector<string>>map ;
+
+    for (int i = 0;i<strs.size();i++)
+    {
+        string temp = strs[i];
+
+        sort(begin(temp),end(temp));
+
+        map[temp].push_back(strs[i]); // map->temp (sorted word) as a key ..... add strs[i] (eat) to map vector ;
+    }
+
+/*Original word (strs[i])	Sorted word (temp)	map after inserting strs[i]
+"eat"	    "aet"	    {"aet": ["eat"]}
+"tea"	    "aet"	    {"aet": ["eat", "tea"]}
+"tan"	    "ant"	    {"aet": ["eat", "tea"], "ant": ["tan"]}
+"ate"	    "aet"	    {"aet": ["eat", "tea", "ate"], "ant": ["tan"]}
+"nat"	    "ant"	    {"aet": ["eat", "tea", "ate"], "ant": ["tan", "nat"]}
+"bat"	    "abt"	    {"aet": ["eat", "tea", "ate"], "ant": ["tan", "nat"], "abt": ["bat"]}
+*/
+    for(auto &s : map)
+    {
+        res.push_back(s.second);
+
+    }
+    return res ;
+
+    }
+};
+
+
