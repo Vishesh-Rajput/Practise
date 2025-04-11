@@ -1,0 +1,67 @@
+ 3Sum
+
+Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+
+Notice that the solution set must not contain duplicate triplets.
+// 1. Brute Force (O(n³) Time, O(unique triplets) Space)
+Traverse all triplets using 3 nested loops.
+
+For every triplet, check if the sum is zero.
+
+Sort the triplet and insert into a set to avoid duplicates.
+
+🔴 Very slow and inefficient for large arrays but easy to implement.
+
+// 2. Better Approach (O(n² * log m) Time, O(unique triplets) Space)
+Use 2 nested loops.
+
+For each pair (i, j), compute the required third number as -(nums[i] + nums[j]).
+
+Store seen numbers in a set and check if the third number exists.
+
+Again, sort triplets before inserting in a set to avoid duplicates.
+
+🟡 Slightly faster than brute, but still not optimal. Uses extra space and repeated checking.
+
+// optimal --  sort + two pointer 
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        
+        // sort(begin(nums),end(nums));
+        sort(nums.begin(),nums.end());
+        vector<vector<int>>ans ;
+
+      int n = nums.size() ;
+
+        for(int i = 0 ; i< n ; i++)
+        {   if( i>0 && nums[i]==nums[i-1])  continue ;
+            int j =i+1 ;
+            int k = n-1 ;
+            while(j<k)
+            {
+            int sum = nums[i] + nums[j] + nums[k];
+            if( sum <0 )
+            {
+                    j++;
+            }
+            else if(sum > 0)
+            {
+                k--;
+            }
+                else {
+                    vector<int> temp = {nums[i] , nums[j] , nums[k]  } ;
+
+                    ans.push_back(temp);
+                    j++;k--;
+
+                    while( j<k &&  nums[k]== nums[k+1]) k-- ;
+                    while( j<k &&  nums[j]== nums[j-1]) j++ ;
+
+
+                }
+            }
+        }
+        return ans ;
+    }
+};
