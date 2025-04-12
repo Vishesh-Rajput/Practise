@@ -1,0 +1,26 @@
+Container With Most Water
+
+Given height[], find two indices i and j such that the area formed between them and the x-axis is maximized.
+
+Formula for area = min(height[i], height[j]) * (j - i)
+
+✅ Optimal Approach (Two Pointer) — O(n) Time
+This is the one you implemented correctly above.
+
+Start with two pointers at the ends of the array and move the smaller height inward to try to maximize area.
+
+int maxArea(vector<int>& height) {
+    int i = 0, j = height.size() - 1, maxArea = 0;
+
+    while (i < j) {
+        int h = min(height[i], height[j]);
+        maxArea = max(maxArea, h * (j - i));
+
+        if (height[i] < height[j]) i++;
+        else j--;
+    }
+    return maxArea;
+}
+🐢 Brute Force — O(n²) Time, O(1) Space
+Try every pair of lines and calculate the area.
+
