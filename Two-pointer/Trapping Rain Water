@@ -1,0 +1,45 @@
+Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
+
+
+
+3. 🚀 Optimal (Two Pointers)
+Idea:
+Use two pointers i and j, and maintain l_max and r_max.
+Always move the pointer at the smaller max side.
+class Solution {
+public:
+    int trap(vector<int>& h) {
+        
+        int i = 0 , l_max= h[0];
+        int sum = 0 ;
+
+        int j = h.size()-1 , r_max=  h[j]; 
+    
+    while(i < j )
+    {
+
+        if(l_max <= r_max )
+        {
+            sum+= (l_max - h[i]);
+            i++ ;
+            l_max = max(l_max , h[i]);
+
+        }
+
+        else{
+                sum+= (r_max - h[j]);
+            j-- ;
+            r_max = max(r_max , h[j]);
+        }
+    }
+    return sum ;
+    
+    }
+};
+
+
+
+1. 💡 Brute Force (Naive Approach)
+Idea:
+For every index, find the max height to its left and right.
+Trapped water = min(left_max, right_max) - height[i].
