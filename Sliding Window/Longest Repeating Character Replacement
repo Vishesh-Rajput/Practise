@@ -1,0 +1,45 @@
+
+424. Longest Repeating Character Replacement
+Solved
+Medium
+Topics
+Companies
+You are given a string s and an integer k. You can choose any character of the string and change it to any other uppercase English character. You can perform this operation at most k times.
+
+Return the length of the longest substring containing the same letter you can get after performing the above operations.
+
+
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        vector<int>map(26,0);
+        int i = 0 ;
+        int maxcnt = 0 ;
+
+        int res = 0 ;
+        for(int j = 0 ; j<s.length(); j++)
+        {
+            map[s[j] - 'A'] ++;
+            if(maxcnt < map[s[j] - 'A'])
+            {
+                maxcnt = map[s[j]- 'A'];
+            }
+
+            while(j - i - maxcnt+1 > k) // window len - max freq  > k 
+            {
+                map[s[i] - 'A'] -- ;
+                i++ ;
+                for(int w = 0 ; w<26 ; w++)
+                {
+                    if(maxcnt < map[w])
+                        maxcnt = map[w];
+                }
+            }
+        res = max(res ,  j - i +1);
+        
+        }
+        return res ;
+
+
+    }
+};
