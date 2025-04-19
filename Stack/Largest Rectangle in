@@ -1,0 +1,49 @@
+Largest Rectangle in
+
+Given an array of integers heights representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.
+
+ class Solution {
+public:
+    int largestRectangleArea(vector<int>& h) {
+        int n = h.size();
+        stack<int> st;
+
+        // Step 1: Find the index of the Next Smaller Element (NSE) for each bar
+        vector<int> nse(n, n); // Initialize all NSE as 'n' (no. smaller element to the right)
+
+        for (int i = 0; i < n; i++) {
+            // Pop from stack until we find a bar shorter than the current one
+            while (!st.empty() && h[st.top()] > h[i]) {
+                nse[st.top()] = i; // Current index 'i' is the next smaller for st.top()
+                st.pop();
+            }
+            st.push(i); // Push current index onto stack
+        }
+
+        // Clear the stack for reuse
+        while (!st.empty()) st.pop();
+
+        // Step 2: Find the index of the Previous Smaller Element (PSE) for each bar
+        vector<int> pse(n, -1); // Initialize all PSE as '-1' (no smaller element to the left)
+
+        for (int i = n - 1; i >= 0; i--) {
+            // Pop from stack until we find a bar shorter than the current one
+            while (!st.empty() && h[st.top()] >= h[i]) {
+                pse[st.top()] = i; // Current index 'i' is the previous smaller for st.top()
+                st.pop();
+            }
+            st.push(i); // Push current index onto stack
+        }
+
+        // Step 3: Calculate the maximum area of rectangle for each bar as the smallest height
+        int maxArea = 0;
+        for (int i = 0; i < n; i++) {
+            // Width = distance between next smaller and previous smaller elements - 1
+            int width = nse[i] - pse[i] - 1;
+            int area = h[i] * width; // Area = height * width
+            maxArea = max(maxArea, area); // Track maximum
+        }
+
+        return maxArea;
+    }
+};
