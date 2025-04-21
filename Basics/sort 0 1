@@ -4,6 +4,9 @@ Sort an array of 0s and 1s in ascending order.
 ✅ Output: [0, 1, 1, 1, 1, 1, 1]
 
 🐢 Brute Force
+
+or use Sort (); 
+
 🔍 Intuition:
 Count total number of 0s, fill that many 0s from start, rest all 1s.
 
