@@ -1,0 +1,32 @@
+Peak Index in a Mountain Array
+
+You are given an integer mountain array arr of length n where the values increase to a peak element and then decrease.
+
+Return the index of the peak element.
+
+Your task is to solve it in O(log(n)) time complexity.
+
+ class Solution {
+public:
+    int peakIndexInMountainArray(vector<int>& arr) {
+        
+            int s  = 0;
+            int  e = arr.size()-1;
+
+            while(s <e)
+            {
+                int mid = s + (e-s)/2 ;
+
+                if(arr [ mid -1 ] < arr[mid] && arr[mid ] > arr [mid +1 ])
+                        return mid ;
+                // case one 
+                if(arr[mid] > arr[mid -1 ]) s = mid ;
+
+                if(arr[mid] < arr[mid -1]) e = mid  ;
+
+            } 
+
+            return -1 ; 
+
+    }
+};
