@@ -1,0 +1,43 @@
+Concept	Returns index of...
+Lower Bound	First element ≥ x
+
+Upper Bound	First element > x
+The upper bound of a value x in a sorted array is the first index where the element is strictly greater than x.
+
+Lower Bound // ;
+int LowerBound(std::vector<int>& arr, int x) {
+    int low = 0, high = arr.size() - 1;
+    int ans = arr.size(); // Default to end of array
+
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        if **(arr[mid] >= x)** {
+            ans = mid;        // Possible upper bound
+            high = mid - 1;   // Try to find smaller valid index
+        } else {
+            low = mid + 1;    // Ignore left side
+        }
+    }
+    return ans;
+}
+
+
+// upper Bound 
+
+int upperBound(std::vector<int>& arr, int x) {
+    int low = 0, high = arr.size() - 1;
+    int ans = arr.size(); // Default to end of array
+
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        if **(arr[mid] > x)** {
+            ans = mid;        // Possible upper bound
+            high = mid - 1;   // Try to find smaller valid index
+        } else {
+            low = mid + 1;    // Ignore left side
+        }
+    }
+    return ans;
+}
