@@ -20,6 +20,13 @@ If nums[mid] < target <= nums[high], search right.
 Else search left.
 
 
+in case of duplicates in array ...Find mid = (low + high) / 2
+
+If nums[mid] == target, return true
+
+If nums[low] == nums[mid] == nums[high], we skip duplicates: low++ and high--
+
+
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
