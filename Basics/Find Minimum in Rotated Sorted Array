@@ -1,0 +1,29 @@
+Find Minimum in Rotated Sorted Array
+
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int s = 0, e = nums.size() - 1;
+        int mini = nums[0];
+
+        while (s <= e) {
+            int mid = s + (e - s) / 2;
+
+            // If subarray is already sorted
+            if (nums[s] <= nums[e]) {
+                mini = min(mini, nums[s]);
+                break;
+            }
+
+            if (nums[s] <= nums[mid]) {  // Left half is sorted
+                mini = min(mini, nums[s]);
+                s = mid + 1;
+            } else {  // Right half is unsorted or pivot lies in left half
+                mini = min(mini, nums[mid]);
+                e = mid - 1;
+            }
+        }
+
+        return mini;
+    }
+};
