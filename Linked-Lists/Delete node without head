@@ -1,0 +1,23 @@
+Delete node without head
+
+// hint -- 
+How to become another person in the world? Two steps.
+One, change your appearance to whom you want to be.
+Two, kill that person.
+
+
+
+code -- 
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
+      
+
+
+       node->val = node->next->val ;
+       ListNode * temp = node->next;
+       node->next= node->next->next;
+        delete temp;
+        return ;
+    }
+};
