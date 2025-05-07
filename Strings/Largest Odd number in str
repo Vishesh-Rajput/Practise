@@ -1,20 +1,13 @@
 class Solution {
 public:
-bool checkOdd(char s)
-{
-    int val = (s-'0');
-    if(val%2 !=0)
-        return 1;
-    else return false;
-}
+
     string largestOddNumber(string num) {
         int i = num.length()-1;
         for(;i>=0;i--)
         {
-            if(checkOdd(num[i]))
-                break;
+          if(num[i]%2!=0)return num.substr(0,i+1);
 
         }
-        return num.substr(0,i+1);
+        return "";
     }
 };
