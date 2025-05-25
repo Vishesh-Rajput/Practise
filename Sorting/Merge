@@ -1,0 +1,42 @@
+  void  Merge(vector<int>& nums ,int l ,int m , int h )
+ {
+     int p = l ;
+     int q = m+1 ;
+    vector<int>ans;
+     while(p <=m && q <= h )
+     {
+        if (nums[p] <= nums[q])
+        {
+            ans.push_back(nums[p]);
+            p++;
+        }
+        else{
+            ans.push_back(nums[q]);
+            q++;
+
+            
+        }
+
+     }
+    while (p <= m) ans.push_back(nums[p++]);
+    while (q <= h) ans.push_back(nums[q++]);
+     
+     for (int i = 0; i < ans.size(); i++) {
+            nums[l + i] = ans[i];
+        }
+
+     return ;
+
+ }
+  
+    void mergeSort(vector<int>& nums, int l, int h) {
+        // code here
+            if(l>=h)return;
+
+    int mid = l + (h-l)/2;
+    mergeSort(nums,l,mid);
+    mergeSort(nums , mid+1 , h);
+    Merge(nums , l , mid , h);
+    return ;
+        
+    }
