@@ -1,0 +1,53 @@
+duplicates not allowed ...
+Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates where the candidate numbers sum to target.
+
+Each number in candidates may only be used once in the combination.
+
+Input: candidates = [2,5,2,1,2], target = 5
+Output: 
+[
+[1,2,2],
+[5]
+]
+ 
+
+
+class Solution {
+public:
+void solve( vector<int>&arr , int t , int index , vector<vector<int>>&ans , vector<int>&ds)
+{
+   // base case 
+   if(t == 0)
+   {
+    ans.push_back(ds);
+    return ;
+   }
+
+   // calls 
+   for(int  i = index ; i<arr.size(); i ++)
+   {
+        if(i > index && arr[i] == arr[i-1] ) continue ;
+
+        // same na  ho 
+        if(arr[i] > t )break ;
+        // bada ho toh break 
+        ds.push_back(arr[i]);
+        solve(arr , t - arr[i], i +1 , ans ,ds);
+
+        ds.pop_back();
+       
+
+
+   } 
+
+}
+
+    vector<vector<int>> combinationSum2(vector<int>&can, int target) {
+        sort(can.begin(),can.end());
+        vector<vector<int>> ans ;
+        vector<int>ds;
+
+        solve( can , target , 0 , ans , ds);
+        return ans ;
+    }
+};
