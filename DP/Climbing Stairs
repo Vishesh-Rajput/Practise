@@ -1,0 +1,29 @@
+//memoization 
+int solve(int n ,  vector<int>ds)
+{
+        // base case 
+        if(n<=2)return n ;
+
+        if(ds[n] !=-1) return ds[n];
+
+        return solve(n-1,ds) + solve(n-2,ds);
+}
+
+
+
+// tabulation 
+int solve(int n , vector<int>ds)
+{
+
+    if(n<=2)return n ;
+    ds[1] = 1 ;
+    ds[2] = 2;
+
+    for(int i = 3 ; i<=n ; i++)
+    {
+        ds[i] = ds[i-1] + ds[i-2];
+    }
+
+    return ds[n];
+
+}
