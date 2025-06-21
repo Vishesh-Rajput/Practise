@@ -1,16 +1,66 @@
  recursive 
 
   
-  int solve(vector<int>&arr , int i)
+   int solve(vector<int>&arr , int i)
   {
       
       // base cases
         if(i == 0 )return 0 ;
-        if(i == 1) return abs(arr[1] - arr[0]);
+       
         
         
         int left  = solve(arr , i-1) + abs(arr[i] - arr[i-1]);
-        int right = solve(arr , i-2) + abs(arr[i] - arr[i-2]);
-        
+        int right = INT_MAX ;
+        if(i>1)
+        {
+        right = solve(arr , i-2) + abs(arr[i] - arr[i-2]);
+        }
         return min(left , right) ; 
   }
+
+
+// memoization 
+    int solve(vector<int>&arr , int i, vector<int>&ds)
+  {
+      
+      // base cases
+        if(i == 0 )return 0 ;
+       
+        if(ds[i]!= -1) return ds[i];
+        
+        int left  = solve(arr , i-1 , ds) + abs(arr[i] - arr[i-1]);
+        int right = INT_MAX ;
+        
+        if(i>1)
+        {
+        right = solve(arr , i-2 , ds ) + abs(arr[i] - arr[i-2]);
+        }
+        
+        return ds[i] = min(left , right) ; 
+  }
+
+
+// tabulation 
+int minCost(vector<int>& h) {
+        // Code here
+        int n = h.size();
+        vector<int>dp(n , 0);
+     
+     dp[0] = 0 ; 
+     
+     for(int i = 1 ; i<n; i++)
+     {
+         
+         int l = dp[i-1] + abs(h[i] - h[i-1]);
+         
+         int r = INT_MAX ;
+         
+         if(i>1)
+         {
+             r = dp[i-2] +abs(h[i] - h[i-2]);
+         }
+      dp[i] = min(l,r); 
+     }
+     
+     return dp[n-1];
+     
