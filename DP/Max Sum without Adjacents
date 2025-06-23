@@ -1,0 +1,60 @@
+Max Sum without Adjacents
+
+
+ // 
+recusrion 
+
+solve(vector<int>arr , int i )
+
+{
+// base case
+if(i == 0 ) return arr[0];
+if(i < 0 ) return 0 ;
+
+
+//if pickes
+int pick = arr[i]  + solve(arr , i -2) ;
+
+int notpick = 0 + solve(arr , i-1);
+
+return max(pick , notpick) ;
+
+
+// memoization 
+ int solve(vector<int>&arr ,int i  , vector<int>&ds )
+  {
+      // base cases
+      if(i == 0 )return arr[0];
+      if(i < 0) return 0 ;
+      
+      if(ds[i] != -1) return ds[i];
+      
+      int pick = arr[i] + solve(arr , i-2 ,ds);
+      int npick = 0 + solve(arr, i-1,ds);
+      
+      return ds[i] =  max(pick,npick);
+      
+  }
+
+// tabulation 
+
+ int findMaxSum(vector<int>& arr) {
+        // code here
+        int n =  arr.size() ;
+        vector<int>ds(n+1 , -1);
+        int i = n-1;
+       
+        ds[0] = arr[0] ; 
+       
+       for(int i = 1 ; i<n ; i++)
+       {
+           int pick = arr[i] ; if(i > 1) pick += ds[i-2];
+           
+           int npick = 0 + ds[i-1] ; 
+           
+           ds[i] = max(pick , npick);
+           
+       }
+       return ds[n-1];
+
+}
