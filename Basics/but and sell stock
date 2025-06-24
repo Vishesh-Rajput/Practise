@@ -1,0 +1,16 @@
+   int maxProfit(vector<int>& p) {
+     int mini =  p[0];  // bought on first day
+    int  profit = 0 ;
+
+     for(int i = 1 ; i<p.size() ; i++)
+     {
+
+        int cost  = (p[i] - mini);
+
+        mini = min(p[i] , mini);
+
+        profit = max(cost  , profit);
+
+     }
+     return profit ;
+    }
