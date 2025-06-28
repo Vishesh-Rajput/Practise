@@ -1,0 +1,37 @@
+     // jisko krna hai = a
+        // jisse krna hai = b 
+
+        // INT_MIN / -1 → overflow handle krna pdega
+        if (a == INT_MIN && b == -1)
+            return INT_MAX;
+
+        // result negative hoga ya nahi
+        bool neg = true;
+        if ((a < 0 && b < 0) || (a > 0 && b > 0)) // dono same sign
+            neg = false;
+
+        // dono ko abs bana ke kaam krte h
+        long long x = abs((long long)a); // long long taaki abs(INT_MIN) bhi handle ho
+        long long y = abs((long long)b);
+        long long ans = 0;
+
+        // jab tak x ≥ y hai, try krte raho
+        while (x >= y) {
+            long long temp = y;
+            long long multiple = 1;
+
+            // double krte raho jab tak x se chhota hai
+            while ((temp << 1) <= x) {
+                temp <<= 1;       // divisor ko double krdia
+                multiple <<= 1;   // multiple bhi double hoga
+            }
+
+            x -= temp;       // temp subtract krdia dividend se
+            ans += multiple; // utna multiple add krdo answer me
+        }
+
+        // sign apply krdo
+        if (neg) ans = -ans;
+
+        return ans;
+    }
