@@ -1,0 +1,16 @@
+    int binaryToDecimal(string &b) {
+        // Code here.
+        int len = b.length();
+        int ans =0;
+        int pwr = 1 ;
+        for(int i = len-1 ; i>=0; i--)
+        {
+            if(b[i] == '1')
+            {
+                ans+= (pwr);
+            }
+            
+            pwr= pwr*2;
+        }
+        return ans;
+    }
