@@ -1,0 +1,19 @@
+
+
+//swap
+
+a = a^b ;
+b = a^b ; 
+a = a^b ;
+
+
+/// kth bit check 
+
+( n>> k ) & 1 // shifts the bits to last and check last one!!!
+
+// set kth bit 
+
+i = 1 ;
+i= i<< k ;
+
+return n|i ; 
