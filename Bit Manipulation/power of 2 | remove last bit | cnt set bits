@@ -1,0 +1,18 @@
+// power of two 
+if(n<=0)return 0;
+return (n& n-1) == 0 ? 1;0;
+
+
+// remove last bit 
+return n&(n-1);
+
+
+// number of set bits
+        int cnt =0 ;
+        while(n)
+        {
+            
+            if(n&1 == 1)cnt++;
+            n/=2;
+        }
+        return cnt;
