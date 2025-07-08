@@ -1,0 +1,28 @@
+ 2,9 ---> 3^2 == 9
+
+
+ int s =1 ; 
+        int e = m ;
+        int ans=-1 ;
+        
+        while(s<=e)
+        {
+            int mid = s+(e-s)/2;
+            
+            if( pow(mid , n) == m)
+            {
+                
+                return mid;
+            }
+            
+            if(pow(mid , n) < m)
+            {
+               
+                s = mid+1;
+            }
+            
+            else{
+                e = mid-1;
+            }
+        }
+        return -1;
