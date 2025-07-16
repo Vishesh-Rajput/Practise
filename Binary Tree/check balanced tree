@@ -1,0 +1,23 @@
+int check(TreeNode* root)
+{
+    if(root== nullptr)
+            return 0 ;
+
+    int l = check(root->left);
+    int r = check (root->right);
+
+    if(abs(l-r) > 1)return -1 ;   // checking is staisfying 
+    if(l == -1 || r == -1)return -1;  //  height gets lower 
+
+    else return max(l,r) +1 ;
+}
+    bool isBalanced(TreeNode* root) {
+        
+        if(check(root) == -1){
+            
+            return false;
+            }
+            
+        else { cout<<check(root);
+        return true;}
+    }
