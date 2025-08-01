@@ -20,3 +20,76 @@ public:
     }
     
 };
+
+// suing stack 
+// Function to reverse a linked list using a stack
+Node* reverseWithStack(Node* head) {
+    if (head == nullptr || head->next == nullptr) {
+        return head; // Nothing to reverse
+    }
+
+    stack<Node*> nodeStack;
+    Node* temp = head;
+
+    // 1. Push all nodes onto the stack
+    while (temp != nullptr) {
+        nodeStack.push(temp);
+        temp = temp->next;
+    }
+
+    // 2. Pop nodes and relink them
+    head = nodeStack.top(); // The new head is the last node pushed
+    nodeStack.pop();
+    temp = head;
+
+    while (!nodeStack.empty()) {
+        temp->next = nodeStack.top();
+        nodeStack.pop();
+        temp = temp->next;
+    }
+
+    temp->next = nullptr; // The last node should point to NULL
+
+    return head;
+}
+
+// --- Example Usage ---
+int main() {
+    // Create a list: 1 -> 2 -> 3 -> 4
+    Node* head = new Node(1);
+    head->next = new Node(2);
+    head->next->next = new Node(3);
+    head->next->next->next = new Node(4);
+
+    cout << "Original List: ";
+    printList(head);
+
+    head = reverseWithStack(head);
+
+    cout << "Reversed List (Stack): ";
+    printList(head);
+
+    return 0;
+}
+
+
+
+// using recusrion 
+Node* reverseWithRecursion(Node* head) {
+    // 1. Base case
+    if (head == nullptr || head->next == nullptr) {
+        return head;
+    }
+
+    // 2. Recursive step: reverse the rest of the list
+    Node* rest_head = reverseWithRecursion(head->next);
+
+    // 3. Link the current head to the end of the reversed sub-list
+    // 'head->next' is now the last node of the reversed 'rest'
+    head->next->next = head;
+    head->next = nullptr; // 'head' becomes the new last node
+
+    // The head of the fully reversed list is 'rest_head'
+    return rest_head;
+}
+
